@@ -1,172 +1,70 @@
-# Google Integration Portal
+# Getting Started with Create React App
 
-## Overview
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-The Google Integration Portal is a web application that allows users to view and manage their Google My Business reviews through a centralized platform. This portal leverages the Google My Business API and OAuth 2.0 for secure authentication and enables users to respond to reviews directly from the portal. It is built with a Flask (Python) backend and a React frontend, ensuring modern web technologies for functionality and responsiveness.
+## Available Scripts
 
-## Features
+In the project directory, you can run:
 
-- **Google Authentication**: Secure login using OAuth 2.0 to allow access to Google My Business data.
-- **View Google Reviews**: Fetch and display Google reviews for authenticated users.
-- **Respond to Reviews**: Users can reply to reviews directly from the portal.
-- **Responsive Design**: Accessible across various devices including desktops, tablets, and mobile phones.
-- **Mock API Support**: If Google APIs are unavailable, the portal can run with dummy data to simulate real functionality.
+### `npm start`
 
-## Technologies Used
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-- **Backend**: Flask (Python), Google API Client Library
-- **Frontend**: React, Axios, Bootstrap
-- **Google APIs**: Google My Business API, OAuth 2.0
-- **Optional**: Docker for containerization, pytest for backend testing
+The page will reload when you make changes.\
+You may also see any lint errors in the console.
 
+### `npm test`
 
-## Setup Instructions
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### Backend Setup (Flask)
+### `npm run build`
 
-1. Clone the repository:
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-    ```bash
-    git clone https://github.com/kirtiagarwal06/Google-API-Integration.git
-    cd Google-API-Integration/backend
-    ```
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
-2. Create and activate a virtual environment:
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-    ```bash
-    python3 -m venv venv
-    source venv/bin/activate  # On Windows: venv\Scripts\activate
-    ```
+### `npm run eject`
 
-3. Install the required dependencies:
+**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-    ```bash
-    pip install -r requirements.txt
-    ```
+If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-4. Get Google API credentials:
-    - Go to the Google Developer Console and create a new project.
-    - Enable the Google My Business API and generate OAuth 2.0 credentials.
-    - Download the `client_secrets.json` file and place it in the `backend/` folder.
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-5. Run the backend server:
+You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-    ```bash
-    python app.py
-    ```
+## Learn More
 
-    The backend will run on [http://localhost:5000](http://localhost:5000).
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-### Frontend Setup (React)
+To learn React, check out the [React documentation](https://reactjs.org/).
 
-1. Navigate to the frontend directory:
+### Code Splitting
 
-    ```bash
-    cd ../frontend
-    ```
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-2. Install the frontend dependencies:
+### Analyzing the Bundle Size
 
-    ```bash
-    npm install
-    ```
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-3. Run the React development server:
+### Making a Progressive Web App
 
-    ```bash
-    npm start
-    ```
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-    The frontend will be running on [http://localhost:3000](http://localhost:3000).
+### Advanced Configuration
 
-### Dummy API (Optional)
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-If you don't have access to Google APIs, the application can be run using dummy data.
+### Deployment
 
-1. Modify the `/get_reviews` endpoint in `app.py` to return mock data:
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
-    ```python
-    @app.route("/get_reviews")
-    def get_reviews():
-        reviews = {
-            "reviews": [
-                {"reviewId": "1", "reviewer": {"displayName": "John Doe"}, "comment": "Great service!", "starRating": 5},
-                {"reviewId": "2", "reviewer": {"displayName": "Jane Smith"}, "comment": "Good experience", "starRating": 4},
-            ]
-        }
-        return jsonify(reviews)
-    ```
+### `npm run build` fails to minify
 
-2. Run the backend and frontend using the same steps outlined above. This will simulate the review fetching process.
-
-### Docker Setup (Optional)
-
-You can containerize the application using Docker.
-
-- **Backend Dockerfile:**
-
-    ```dockerfile
-    FROM python:3.9
-    WORKDIR /app
-    COPY . /app
-    RUN pip install -r requirements.txt
-    CMD ["python", "app.py"]
-    ```
-
-- **Frontend Dockerfile:**
-
-    ```dockerfile
-    FROM node:14
-    WORKDIR /app
-    COPY . /app
-    RUN npm install
-    CMD ["npm", "start"]
-    ```
-
-- Build and run the containers:
-
-    ```bash
-    docker build -t google-portal-backend ./backend
-    docker build -t google-portal-frontend ./frontend
-    docker run -p 5000:5000 google-portal-backend
-    docker run -p 3000:3000 google-portal-frontend
-    ```
-
-## Testing
-
-- **Backend Testing (pytest)**
-  Unit tests are located in the `backend/tests/` directory.
-  To run tests:
-
-    ```bash
-    pytest
-    ```
-
-- **Frontend Testing (Jest)**
-  Frontend unit tests are located in the `frontend/src/tests/` directory.
-  To run tests:
-
-    ```bash
-    npm test
-    ```
-
-## Future Enhancements
-
-- **Email Notifications**: Notify users when new reviews are posted.
-- **Advanced Filtering**: Allow filtering of reviews by star rating, date, etc.
-- **Analytics Dashboard**: Add charts and review statistics over time.
-- **Admin Controls**: Implement admin functionality for managing multiple Google accounts.
-
-## Contributing
-
-- Fork the repository.
-- Create a new feature branch: `git checkout -b my-feature-branch`.
-- Commit your changes: `git commit -m 'Add some feature'`.
-- Push to the branch: `git push origin my-feature-branch`.
-- Submit a pull request.
-
-
-## Contact
-
-For any questions or issues, feel free to reach out at kirtiagarwal.ka54@gmail.com
-
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
